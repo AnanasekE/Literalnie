@@ -10,7 +10,7 @@ $(document).ready(function () {
     const activeLine = (lineId) => {
         for (let i = 0; i < inputsLength; i++) {
             const input = inputs[i];
-
+            input.autocomplete = false
             input.disabled = false;
 
             if (input.parentElement.id !== lineId) {
@@ -35,19 +35,20 @@ $(document).ready(function () {
             console.log(chances)
             $.post('/api/check', {word: submitedWord})
                 .then((response) => { // response - word
-                    // console.log(response);
 
-                        // red
-                        //console.log(elem1)
+                    const x = response.success ? response : false;
+                    const color = x ? 'rgba(24,215,24,0.4)' : 'rgba(215,24,24,0.4)';
 
 
-                    var x = response.success ? response : false
-                    var color = x ? 'rgba(24,215,24,0.4)' : 'rgba(215,24,24,0.4)'
                     for (let i = 0; i < 5; i++) {
                         document.getElementById(lineId + '-' + i).style.background = color
+                        document.getElementById('won').innerHTML = 'Right Letters: ' + response.h
                     }
+                    console.log(response.h)
                     activeLine(nextLine);
                     nextRow.focus();
+
+
 
                 });
         }
@@ -66,7 +67,7 @@ $(document).ready(function () {
                 submitLine(line);
                 return;
             }
-            ;
+
 
             if (pattern.includes(key)) {
                 const nextInput = e.target.nextElementSibling;
