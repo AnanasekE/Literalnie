@@ -42,7 +42,7 @@ $(document).ready(function () {
 
                     for (let i = 0; i < 5; i++) {
                         document.getElementById(lineId + '-' + i).style.background = color
-                        document.getElementById('won').innerHTML = 'Right Letters: ' + response.h
+                        document.getElementById('RightLett').innerHTML = 'Right Letters: ' + response.h
                     }
                     console.log(response.h)
                     activeLine(nextLine);
@@ -56,6 +56,7 @@ $(document).ready(function () {
 
     for (let i = 0; i < inputsLength; i++) {
         const input = inputs[i];
+
 
         input.addEventListener('keypress', (e) => {
             const key = e.key.toUpperCase();
